@@ -10,7 +10,7 @@ import RefundPolicy from './pages/RefundPolicy';
 function App() {
   return (
     <HelmetProvider>
-      <Router>
+      <Router basename="/growthvalley-llp">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/checkout" element={<Checkout />} />
