@@ -10,7 +10,7 @@ export function StickyMobileCTA() {
       <div className="flex items-center justify-between gap-3">
         <div className="flex flex-col">
           <span className="text-xs text-slate-500 line-through">₹15,000</span>
-          <span className="text-lg font-bold text-slate-900">₹4,999</span>
+          <span className="text-lg font-bold text-green-600">FREE</span>
         </div>
         <button
           onClick={scrollToBooking}

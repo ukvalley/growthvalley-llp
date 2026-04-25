@@ -10,6 +10,7 @@ import {
 import { ScrollProgressBar } from '../components/ScrollProgressBar';
 import { ScrollingTicker } from '../components/ScrollingTicker';
 import { SocialProofNotification } from '../components/SocialProofNotification';
+import { RecentActivityNotification } from '../components/RecentActivityNotification';
 import { ScrollAnimateWrapper } from '../components/ScrollAnimateWrapper';
 import { CountdownTimer } from '../components/CountdownTimer';
 import { OfferPopup } from '../components/OfferPopup';
@@ -19,7 +20,7 @@ const BUSINESS_NAME = "Growthvalley LLP";
 const EXPERT_NAME = "Umesh Khivasara";
 const CO_EXPERT = "Mohit Dhadiwal";
 const DURATION = 45;
-const PRICE = 4999;
+const PRICE = 0;
 const ORIGINAL_PRICE = 15000;
 
 // Mobile-Optimized CTA Component
@@ -38,7 +39,7 @@ function CTASection({ variant = 'simple', title, subtitle }: CTASectionProps) {
       badge: '⏰ LIMITED TIME',
       badgeColor: 'bg-red-500',
       title: title || "Don't Miss Out!",
-      subtitle: subtitle || `Only ₹${PRICE} for next 24h. Then ₹${ORIGINAL_PRICE}`,
+      subtitle: subtitle || `FREE for next 24h. Then ₹${ORIGINAL_PRICE}`,
       urgencyText: '🔥 23 booked in 24h',
       showCountdown: true
     },
@@ -71,7 +72,7 @@ function CTASection({ variant = 'simple', title, subtitle }: CTASectionProps) {
       badge: 'BOOK NOW',
       badgeColor: 'bg-yellow-500',
       title: title || `Book Your ${DURATION}-Min Call`,
-      subtitle: subtitle || `₹${PRICE} (Was ₹${ORIGINAL_PRICE})`,
+      subtitle: subtitle || `FREE (Was ₹${ORIGINAL_PRICE})`,
       urgencyText: '⏰ Price increases soon',
       showCountdown: true
     }
@@ -207,83 +208,155 @@ export default function Index() {
     <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden">
       <Helmet>
         <title>1:1 Strategy Call with {EXPERT_NAME} | {BUSINESS_NAME}</title>
-        <meta name="description" content={`Book a ${DURATION}-minute strategy call. Transform your marketing, generate 3x more leads. Only ₹${PRICE}`} />
+        <meta name="description" content={`Book a ${DURATION}-minute strategy call. Transform your marketing, generate 3x more leads. FREE for limited time`} />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <link rel="canonical" href="https://growthvalley.com/" />
       </Helmet>
 
       <ScrollProgressBar />
+      <RecentActivityNotification />
       <ScrollingTicker />
       {showNotification && <SocialProofNotification />}
 
       {/* HERO SECTION - Mobile: Full screen text only | Desktop: Text + Image side by side */}
       <section className="relative min-h-[100svh] md:min-h-screen flex flex-col justify-center overflow-hidden">
-        <div className="absolute inset-0 gradient-hero" />
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=60')] opacity-10 bg-cover bg-center" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950" />
 
-        <div className="relative flex-1 flex flex-col justify-start md:justify-center items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-8 md:py-20">
+        <div className="relative flex-1 flex flex-col justify-start md:justify-center items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-4 md:py-20">
           {/* MOBILE: Full screen text content | DESKTOP: Side by side with image */}
-          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-12 items-center w-full">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-16 items-center w-full">
 
             {/* TEXT CONTENT - Full screen on mobile */}
             <ScrollAnimateWrapper animation="fade-up" className="w-full">
-              <div className="flex flex-col justify-start md:justify-center min-h-[80vh] md:min-h-0 space-y-3 md:space-y-5 text-center lg:text-left pt-4">
+              <div className="flex flex-col justify-start md:justify-center min-h-[75vh] md:min-h-0 space-y-4 md:space-y-5 text-center lg:text-left pt-2 pb-2 md:pb-0">
 
                 {/* Badge */}
-                <div className="inline-flex items-center justify-center lg:justify-start">
-                  <div className="flex items-center px-4 py-2 bg-yellow-400/10 border border-yellow-400/30 rounded-full">
-                    <Sparkles className="w-4 h-4 text-yellow-400 mr-2" />
-                    <span className="text-yellow-400 text-sm font-bold">Limited Slots</span>
+                <div className="flex items-center justify-center lg:justify-start">
+                  <div className="flex items-center px-3 py-1.5 bg-yellow-400/10 border border-yellow-400/30 rounded-full">
+                    <Sparkles className="w-3.5 h-3.5 text-yellow-400 mr-1.5" />
+                    <span className="text-yellow-400 text-xs font-bold">Limited Slots</span>
                   </div>
                 </div>
 
-                {/* HEADLINE - BIG & BOLD on mobile */}
-                <h1 className="font-display text-[2.25rem] leading-[1.1] font-black sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
-                  Your Product is <span className="text-yellow-400">Good</span>... <br className="hidden sm:block" />
-                  So Why Isn't It <span className="text-yellow-400">Selling?</span>
-                </h1>
+                {/* HEADLINE - BIG & BOLD with animation */}
+                <div className="relative text-center lg:text-left">
+                  {/* Animated highlight badge */}
+                  <div className="flex items-center justify-center lg:justify-start gap-2 mb-3">
+                    <span className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse"></span>
+                    <span className="text-red-400 text-sm font-bold uppercase tracking-wider">Read This</span>
+                  </div>
+
+                  <h1 className="font-display text-[1.65rem] sm:text-[2.25rem] md:text-[2rem] lg:text-[2.25rem] xl:text-4xl leading-[1.2] font-black">
+                    <span className="block text-white/80 text-sm sm:text-base font-medium mb-3">If You're Thinking...</span>
+                    <span className="block">
+                      "Your Product is
+                      <span className="inline bg-yellow-400 text-black px-1.5 py-0.5 rounded-md">
+                        <span className="font-black">Good</span>
+                      </span>..."
+                    </span>
+                    <span className="block mt-2">
+                      "So Why Isn't It
+                      <span className="inline bg-red-500 text-white px-1.5 py-0.5 rounded-md">
+                        <span className="font-black">Selling?</span>
+                      </span>"
+                    </span>
+                  </h1>
+
+                  {/* Scroll indicator */}
+                  <div className="flex items-center justify-center gap-1.5 mt-5 text-white/50">
+                    <span className="text-[10px] font-medium">Scroll for answer</span>
+                    <svg className="w-3.5 h-3.5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </div>
+                </div>
 
                 {/* SUBHEADLINE - Larger on mobile */}
-                <p className="text-lg sm:text-xl md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium">
-                  Get a <span className="text-yellow-400 font-bold">{DURATION}-min Strategy Call</span> with {EXPERT_NAME} —
-                  Framework that generated <span className="text-yellow-400 font-bold">₹30L in sales</span> from ₹30k ad spend.
+                <p className="text-xl sm:text-2xl md:text-xl lg:text-2xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0 font-semibold">
+                  Get a <span className="bg-green-500/20 text-green-400 font-black px-2 py-1 rounded-md border border-green-500/40">{DURATION}-min Strategy Call</span> with {EXPERT_NAME} —
+                  Framework that generated <span className="bg-yellow-400 text-black font-black px-2 py-0.5 rounded-md">₹30L in sales</span> from <span className="underline decoration-yellow-400 decoration-2 underline-offset-4 font-bold">₹30k ad spend</span>.
                 </p>
 
                 {/* CTA BOX - Prominent on mobile */}
-                <div className="bg-white/5 border-2 border-yellow-400/40 rounded-2xl p-5 md:p-6 mt-2">
+                <div className="bg-white/5 border-2 border-yellow-400/40 rounded-2xl p-5 md:p-6 mt-5">
                   <div className="flex items-center justify-center lg:justify-start gap-2 mb-4">
-                    <Flame className="w-5 h-5 text-red-400" />
-                    <span className="text-red-400 font-bold text-sm uppercase tracking-wide">Only 3 spots left this week</span>
+                    <Flame className="w-5 h-5 text-red-400 animate-pulse" />
+                    <span className="bg-red-500 text-white font-black text-sm uppercase tracking-wide px-3 py-1.5 rounded-full">Only 3 spots left</span>
                   </div>
 
-                  <Link to="/checkout" className="btn-hero text-base font-bold py-4 shadow-lg shadow-yellow-400/20">
-                    Book Now @ ₹{PRICE} →
+                  <Link to="/checkout" className="btn-hero text-base md:text-lg font-black py-4 shadow-lg shadow-yellow-400/20">
+                    Book My FREE Call →
                   </Link>
 
-                  <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mt-4 text-sm font-medium">
-                    <span className="flex items-center gap-1.5 text-green-400">
-                      <Shield className="w-4 h-4" /> 7-Day Guarantee
+                  <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 mt-4 md:mt-5 text-sm md:text-base font-black">
+                    <span className="flex items-center justify-center gap-2 bg-green-500/20 text-green-400 px-3 py-2 md:px-4 md:py-2 rounded-full border border-green-500/30 w-full sm:w-auto">
+                      <Shield className="w-4 h-4 md:w-5 md:h-5" /> 7-Day Money-Back
                     </span>
-                    <span className="flex items-center gap-1.5 text-yellow-400">
-                      <Gift className="w-4 h-4" /> Free Bonuses
+                    <span className="flex items-center justify-center gap-2 bg-yellow-400/20 text-yellow-400 px-3 py-2 md:px-4 md:py-2 rounded-full border border-yellow-400/30 w-full sm:w-auto">
+                      <Gift className="w-4 h-4 md:w-5 md:h-5" /> ₹15,997 Bonuses FREE
                     </span>
                   </div>
                 </div>
 
                 {/* Trust badges */}
-                <div className="flex items-center justify-center lg:justify-start gap-5 pt-2 text-sm text-white/70 font-medium">
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 pt-4 md:pt-5 text-sm sm:text-base text-white/80 font-semibold">
                   <div className="flex items-center gap-1.5">
-                    <Check className="w-4 h-4 text-green-400" />
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
                     <span>Vision Board</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <Check className="w-4 h-4 text-green-400" />
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
                     <span>Strategy Sheet</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <Check className="w-4 h-4 text-green-400" />
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
                     <span>Action Plan</span>
                   </div>
+                </div>
+
+                {/* MOBILE ONLY: Photo with caption - moved up into hero section */}
+                <div className="lg:hidden mt-4">
+                  <ScrollAnimateWrapper animation="fade-up">
+                    <div className="relative max-w-xs mx-auto">
+                      <div className="relative bg-gradient-to-br from-yellow-400/20 to-yellow-600/10 rounded-2xl p-1.5">
+                        <img
+                          src="./umesh-khivasara.jpg"
+                          alt={EXPERT_NAME}
+                          className="w-full rounded-xl shadow-2xl"
+                          loading="eager"
+                        />
+                        {/* Price badge */}
+                        <div className="absolute -bottom-3 -left-3 bg-green-500 text-white p-3 rounded-lg shadow-glow">
+                          <p className="font-display font-black text-xl">FREE</p>
+                          <p className="text-xs line-through text-white/70">₹{ORIGINAL_PRICE}</p>
+                        </div>
+                      </div>
+                      {/* Urgency badge */}
+                      <div className="absolute -top-2 -right-2 bg-white text-black px-3 py-1 rounded-full shadow-lg text-xs font-bold animate-bounce">
+                        🔥 Only 3 Left!
+                      </div>
+                    </div>
+
+                    {/* Caption below image */}
+                    <div className="text-center mt-6">
+                      <p className="text-lg font-bold">{EXPERT_NAME}</p>
+                      <p className="text-white/60 text-sm">Co-founder, {BUSINESS_NAME}</p>
+                      <div className="flex justify-center gap-6 mt-3">
+                        <div className="text-center">
+                          <p className="text-xl font-bold text-yellow-400">10+</p>
+                          <p className="text-xs text-white/60">Years Exp.</p>
+                        </div>
+                        <div className="text-center">
+                          <p className="text-xl font-bold text-yellow-400">500+</p>
+                          <p className="text-xs text-white/60">Clients</p>
+                        </div>
+                        <div className="text-center">
+                          <p className="text-xl font-bold text-yellow-400">₹100Cr+</p>
+                          <p className="text-xs text-white/60">Generated</p>
+                        </div>
+                      </div>
+                    </div>
+                  </ScrollAnimateWrapper>
                 </div>
               </div>
             </ScrollAnimateWrapper>
@@ -294,15 +367,15 @@ export default function Index() {
                 <div className="relative w-full">
                   <div className="relative bg-gradient-to-br from-yellow-400/20 to-yellow-600/10 rounded-3xl p-2">
                     <img
-                      src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+                      src="./umesh-khivasara.jpg"
                       alt={EXPERT_NAME}
                       className="w-full rounded-2xl shadow-2xl"
                       loading="eager"
                     />
                     {/* Price badge */}
-                    <div className="absolute -bottom-6 -left-6 bg-yellow-400 text-black p-4 rounded-xl shadow-glow">
-                      <p className="font-display font-bold text-2xl">₹{PRICE}</p>
-                      <p className="text-sm line-through text-red-600">₹{ORIGINAL_PRICE}</p>
+                    <div className="absolute -bottom-6 -left-6 bg-green-500 text-white p-4 rounded-xl shadow-glow">
+                      <p className="font-display font-black text-2xl">FREE</p>
+                      <p className="text-sm line-through text-white/70">₹{ORIGINAL_PRICE}</p>
                     </div>
                   </div>
                   {/* Urgency badge */}
@@ -313,53 +386,6 @@ export default function Index() {
               </ScrollAnimateWrapper>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* MOBILE ONLY: Photo section that scrolls after hero */}
-      <section className="lg:hidden relative py-12 bg-slate-900">
-        <div className="max-w-md mx-auto px-4">
-          <ScrollAnimateWrapper animation="fade-up">
-            <div className="relative">
-              <div className="relative bg-gradient-to-br from-yellow-400/20 to-yellow-600/10 rounded-2xl p-1.5">
-                <img
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                  alt={EXPERT_NAME}
-                  className="w-full rounded-xl shadow-2xl"
-                  loading="lazy"
-                />
-                {/* Price badge */}
-                <div className="absolute -bottom-3 -left-3 bg-yellow-400 text-black p-3 rounded-lg shadow-glow">
-                  <p className="font-display font-bold text-xl">₹{PRICE}</p>
-                  <p className="text-xs line-through text-red-600">₹{ORIGINAL_PRICE}</p>
-                </div>
-              </div>
-              {/* Urgency badge */}
-              <div className="absolute -top-2 -right-2 bg-white text-black px-3 py-1 rounded-full shadow-lg text-xs font-bold animate-bounce">
-                🔥 Only 3 Left!
-              </div>
-            </div>
-
-            {/* Caption below image */}
-            <div className="text-center mt-8">
-              <p className="text-lg font-bold">{EXPERT_NAME}</p>
-              <p className="text-white/60 text-sm">Co-founder, {BUSINESS_NAME}</p>
-              <div className="flex justify-center gap-6 mt-4">
-                <div className="text-center">
-                  <p className="text-xl font-bold text-yellow-400">10+</p>
-                  <p className="text-xs text-white/60">Years Exp.</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-xl font-bold text-yellow-400">500+</p>
-                  <p className="text-xs text-white/60">Clients</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-xl font-bold text-yellow-400">₹100Cr+</p>
-                  <p className="text-xs text-white/60">Generated</p>
-                </div>
-              </div>
-            </div>
-          </ScrollAnimateWrapper>
         </div>
       </section>
 
@@ -410,34 +436,36 @@ export default function Index() {
       <section className="py-12 md:py-20 bg-slate-950">
         <div className="max-w-7xl mx-auto px-4">
           <ScrollAnimateWrapper animation="fade-up">
-            <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-2 md:mb-4">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-black text-center mb-3 md:mb-4">
               Are You Stuck With <span className="text-yellow-400">Any Of These?</span>
             </h2>
-            <p className="text-center text-white/60 text-sm md:text-base mb-8 md:mb-12 max-w-2xl mx-auto px-4">
+            <p className="text-center text-white/70 text-base md:text-lg mb-8 md:mb-12 max-w-2xl mx-auto px-4">
               12 common problems business owners face when trying to scale
             </p>
           </ScrollAnimateWrapper>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
             {[
-              { icon: TrendingDown, title: "Declining Sales", desc: "Revenue dropping month over month" },
-              { icon: AlertTriangle, title: "High CAC", desc: "Spending more but ROI keeps dropping" },
-              { icon: Users, title: "Poor Leads", desc: "Inquiries don't convert to customers" },
-              { icon: Target, title: "Inconsistent Revenue", desc: "No predictable income system" },
-              { icon: Shield, title: "Poor Retention", desc: "One-time buyers only" },
-              { icon: Zap, title: "Ineffective Marketing", desc: "Nothing seems to work" },
-              { icon: Brain, title: "No Clarity", desc: "Dozens of ideas, no direction" },
-              { icon: Wallet, title: "Cash Flow Issues", desc: "Revenue up but profit shrinking" },
-              { icon: BarChart3, title: "No Tracking", desc: "Flying blind, no data" },
-              { icon: Building2, title: "Can't Scale", desc: "Stuck at same revenue level" },
-              { icon: Package, title: "Product-Market Fit", desc: "Wrong offer to wrong people" },
-              { icon: Megaphone, title: "Weak Brand", desc: "Lost in sea of competitors" },
+              { icon: TrendingDown, title: "Sales Are Dropping", desc: "Your revenue was growing, but now it's sliding down every month and you don't know why" },
+              { icon: AlertTriangle, title: "Ads Burning Cash", desc: "You're spending ₹50K+ on ads but the ROI keeps getting worse. Leads are there but they don't buy" },
+              { icon: Users, title: "Wrong People Inquiring", desc: "You get 50 inquiries but only 2 convert. Most are price-shoppers who waste your time" },
+              { icon: Target, title: "Income Rollercoaster", desc: "One month ₹5L revenue, next month ₹1L. No predictable system to count on" },
+              { icon: Shield, title: "One-Time Buyers Only", desc: "Customers buy once and disappear. No repeat business even when your product is great" },
+              { icon: Zap, title: "Tried Everything", desc: "Posted daily on Instagram, ran ads, built a website... but nothing moves the needle" },
+              { icon: Brain, title: "Too Many Ideas", desc: "You watch 20 YouTube videos, read 5 books, but still don't know what to do first" },
+              { icon: Wallet, title: "Working Hard, Earning Less", desc: "Revenue looks good but after salaries, rent, and ad spend - almost nothing left" },
+              { icon: BarChart3, title: "Flying Blind", desc: "You don't know which ad is working, where customers come from, or what to scale" },
+              { icon: Building2, title: "Stuck at Same Level", desc: "You've been at ₹2-3L/month for 6 months. Can't break through to next level" },
+              { icon: Package, title: "Selling to Everyone", desc: "Your offer tries to please everyone, so it attracts no one. No clear positioning" },
+              { icon: Megaphone, title: "Invisible in Market", desc: "100 competitors doing same thing. Customers can't tell why they should pick you" },
             ].map((item, index) => (
               <ScrollAnimateWrapper key={index} animation="fade-up" delay={index * 50}>
-                <div className="bg-slate-900 border border-red-500/30 rounded-lg md:rounded-xl p-4 md:p-6 hover:border-red-500/60 transition-colors">
-                  <item.icon className="w-8 h-8 md:w-10 md:h-10 text-red-400 mb-2 md:mb-4" />
-                  <h3 className="font-display font-bold text-sm md:text-lg mb-1 md:mb-2">{item.title}</h3>
-                  <p className="text-white/60 text-xs md:text-sm">{item.desc}</p>
+                <div className="bg-slate-900 border border-red-500/30 rounded-lg md:rounded-xl p-5 md:p-6 hover:border-red-500/60 transition-colors">
+                  <div className="flex items-center gap-3 mb-3 md:mb-4">
+                    <item.icon className="w-8 h-8 md:w-10 md:h-10 text-red-400" />
+                    <span className="bg-red-500/20 text-red-300 text-sm md:text-base font-black px-2.5 py-1 rounded">{item.title}</span>
+                  </div>
+                  <p className="text-white/80 text-sm md:text-base leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollAnimateWrapper>
             ))}
@@ -453,37 +481,37 @@ export default function Index() {
       <section id="benefits" className="py-12 md:py-20 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4">
           <ScrollAnimateWrapper animation="fade-up">
-            <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-2 md:mb-4">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-black text-center mb-3 md:mb-4">
               What You'll Get In <span className="text-yellow-400">{DURATION} Minutes</span>
             </h2>
-            <p className="text-center text-white/60 text-sm md:text-base mb-8 md:mb-12 max-w-2xl mx-auto px-4">
+            <p className="text-center text-white/70 text-base md:text-lg mb-8 md:mb-12 max-w-2xl mx-auto px-4">
               Complete action plan you can implement immediately
             </p>
           </ScrollAnimateWrapper>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
             {[
-              { title: "Vision Board", desc: "90-day roadmap with milestones" },
-              { title: "Strategy Sheet", desc: "Your marketing blueprint" },
-              { title: "Market Research", desc: "Know your competition" },
-              { title: "Offer Engineering", desc: "Package to sell itself" },
-              { title: "Traffic Strategy", desc: "Find ideal customers" },
-              { title: "Automation Setup", desc: "WhatsApp + Email sequences" },
-              { title: "Sales Funnel", desc: "Buyer journey mapped" },
-              { title: "Content Calendar", desc: "30 days of ideas" },
-              { title: "Lead Magnets", desc: "Attract qualified leads" },
-              { title: "Conversion Opt.", desc: "Double your conversion" },
-              { title: "Retention System", desc: "Repeat customers" },
-              { title: "Tracking Dashboard", desc: "Stay on target" },
+              { title: "Your 90-Day Vision Board", desc: "Exact roadmap showing what to do week by week to hit your revenue goals" },
+              { title: "Complete Strategy Sheet", desc: "Step-by-step marketing blueprint customized for YOUR business" },
+              { title: "Competitor Intel Report", desc: "See what your top 3 competitors are doing and how to beat them" },
+              { title: "Irresistible Offer Design", desc: "Package your service so it sells itself (no more price negotiations)" },
+              { title: "Traffic Source Map", desc: "Know exactly WHERE to find your ideal customers (not guesswork)" },
+              { title: "WhatsApp + Email Sequences", desc: "Pre-written message templates that convert leads on autopilot" },
+              { title: "High-Converting Sales Funnel", desc: "Map every step from stranger to buyer (no leaks, no lost sales)" },
+              { title: "30-Day Content Calendar", desc: "What to post, when to post, and what captions to write" },
+              { title: "Lead Magnet Templates", desc: "Free tools to attract qualified leads (not time-wasters)" },
+              { title: "Conversion Optimization", desc: "Quick wins to double your sales without spending more on ads" },
+              { title: "Customer Retention System", desc: "Turn one-time buyers into repeat customers who refer friends" },
+              { title: "ROI Tracking Dashboard", desc: "Simple metrics to track so you know what's working" },
             ].map((item, index) => (
               <ScrollAnimateWrapper key={index} animation="fade-up" delay={index * 50}>
-                <div className="flex items-start gap-3 md:gap-4 bg-slate-950 rounded-lg md:rounded-xl p-4 md:p-6 border border-white/10 hover:border-yellow-400/50 transition-colors">
-                  <div className="w-8 h-8 md:w-10 md:h-10 bg-yellow-400 rounded-md md:rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Check className="w-4 h-4 md:w-5 md:h-5 text-black" />
+                <div className="flex items-start gap-3 md:gap-4 bg-slate-950 rounded-lg md:rounded-xl p-5 md:p-6 border border-white/10 hover:border-yellow-400/50 transition-colors">
+                  <div className="w-9 h-9 md:w-11 md:h-11 bg-yellow-400 rounded-md md:rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Check className="w-5 h-5 md:w-6 md:h-6 text-black" />
                   </div>
                   <div>
-                    <h3 className="font-display font-bold text-sm md:text-base mb-0.5 md:mb-1">{item.title}</h3>
-                    <p className="text-white/60 text-xs md:text-sm">{item.desc}</p>
+                    <span className="bg-green-500/20 text-green-300 text-sm font-black px-2.5 py-1 rounded mb-2 inline-block">{item.title}</span>
+                    <p className="text-white/80 text-sm md:text-base leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               </ScrollAnimateWrapper>
@@ -553,18 +581,18 @@ export default function Index() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {[
-              { name: "Rahul Sharma", business: "E-commerce", result: "3x Revenue", desc: "₹2L to ₹6L monthly", metric: "₹6L+/mo" },
-              { name: "Priya Patel", business: "Coaching", result: "10x ROAS", desc: "₹50K to ₹5L from ads", metric: "10x ROAS" },
-              { name: "Amit Kumar", business: "SaaS", result: "60% Lower CAC", desc: "₹2K to ₹800 per customer", metric: "₹800 CAC" },
-              { name: "Sneha Gupta", business: "Consulting", result: "Fully Booked", desc: "3-month waiting list", metric: "Booked" },
-              { name: "Vikram Rao", business: "Real Estate", result: "50+ Leads/mo", desc: "From 2-3 to 50+ leads", metric: "50+ Leads" },
-              { name: "Neha Malhotra", business: "Fitness", result: "80% Retention", desc: "Month-over-month loyalty", metric: "80% Retain" },
+              { name: "Rahul Sharma", initials: "RS", business: "E-commerce", result: "3x Revenue", desc: "₹2L to ₹6L monthly", metric: "₹6L+/mo", color: "from-blue-400 to-blue-600" },
+              { name: "Priya Patel", initials: "PP", business: "Coaching", result: "10x ROAS", desc: "₹50K to ₹5L from ads", metric: "10x ROAS", color: "from-pink-400 to-pink-600" },
+              { name: "Amit Kumar", initials: "AK", business: "SaaS", result: "60% Lower CAC", desc: "₹2K to ₹800 per customer", metric: "₹800 CAC", color: "from-violet-400 to-violet-600" },
+              { name: "Sneha Gupta", initials: "SG", business: "Consulting", result: "Fully Booked", desc: "3-month waiting list", metric: "Booked", color: "from-emerald-400 to-emerald-600" },
+              { name: "Vikram Rao", initials: "VR", business: "Real Estate", result: "50+ Leads/mo", desc: "From 2-3 to 50+ leads", metric: "50+ Leads", color: "from-amber-400 to-orange-600" },
+              { name: "Neha Malhotra", initials: "NM", business: "Fitness", result: "80% Retention", desc: "Month-over-month loyalty", metric: "80% Retain", color: "from-rose-400 to-rose-600" },
             ].map((item, index) => (
               <ScrollAnimateWrapper key={index} animation="fade-up" delay={index * 100}>
                 <div className="bg-slate-950 rounded-xl md:rounded-2xl p-5 md:p-8 border border-white/10 hover:border-yellow-400/50 transition-all">
                   <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-yellow-400 rounded-full flex items-center justify-center flex-shrink-0">
-                      <TrendingUp className="w-5 h-5 md:w-6 md:h-6 text-black" />
+                    <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${item.color} rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold text-sm md:text-base shadow-lg`}>
+                      {item.initials}
                     </div>
                     <div>
                       <h3 className="font-display font-bold text-sm md:text-base">{item.name}</h3>
@@ -619,7 +647,7 @@ export default function Index() {
             <ScrollAnimateWrapper animation="fade-right">
               <div className="relative w-full max-w-sm mx-auto lg:max-w-none">
                 <img
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+                  src="./umesh-khivasara.jpg"
                   alt={EXPERT_NAME}
                   className="w-full rounded-xl md:rounded-2xl shadow-2xl"
                 />
@@ -787,15 +815,15 @@ export default function Index() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {[
-              { name: "Priya Sharma", company: "StyleMart", role: "E-commerce Owner", text: "ROI was incredible. Umesh identified issues I'd missed for months. Revenue jumped 40% in 30 days.", photo: "PS" },
-              { name: "Rahul Patel", company: "GrowthWorks", role: "Agency Founder", text: "Finally someone who gets it. Strategy sheet alone worth 10x the price. Best investment this year.", photo: "RP" },
-              { name: "Amit Kumar", company: "TechFlow", role: "SaaS Founder", text: "From confused to clear in 45 min. Booked 3 more calls. My CAC dropped by 60% using his framework.", photo: "AK" },
-              { name: "Sneha Gupta", company: "ConsultPro", role: "Business Consultant", text: "Was skeptical at first. But the roadmap he created was gold. Now fully booked 3 months out.", photo: "SG" },
-              { name: "Vikram Rao", company: "EstateMax", role: "Real Estate Broker", text: "Lead generation system is brilliant. From 2 leads/month to 50+. Never expected such results.", photo: "VR" },
-              { name: "Neha Malhotra", company: "FitLife Studio", role: "Fitness Coach", text: "Client retention went from 45% to 80%. The automation sequences he recommended are magic.", photo: "NM" },
-              { name: "Arjun Mehta", company: "CloudNine", role: "Tech Startup CEO", text: "Raised our seed round after implementing his positioning strategy. Game changer for us.", photo: "AM" },
-              { name: "Kavita Reddy", company: "Organic Foods", role: "D2C Brand Owner", text: "My ROAS went from 1.2x to 4.5x in 60 days. The offer engineering framework is pure gold.", photo: "KR" },
-              { name: "Rajesh Iyer", company: "EduLearn", role: "EdTech Founder", text: "Booked this call as a last resort. Best decision. Our student acquisition cost halved.", photo: "RI" },
+              { name: "Priya Sharma", company: "StyleMart", role: "E-commerce Owner", text: "ROI was incredible. Umesh identified issues I'd missed for months. Revenue jumped 40% in 30 days.", initials: "PS", color: "from-emerald-400 to-emerald-600" },
+              { name: "Rahul Patel", company: "GrowthWorks", role: "Agency Founder", text: "Finally someone who gets it. Strategy sheet alone worth 10x the price. Best investment this year.", initials: "RP", color: "from-blue-400 to-blue-600" },
+              { name: "Amit Kumar", company: "TechFlow", role: "SaaS Founder", text: "From confused to clear in 45 min. Booked 3 more calls. My CAC dropped by 60% using his framework.", initials: "AK", color: "from-violet-400 to-violet-600" },
+              { name: "Sneha Gupta", company: "ConsultPro", role: "Business Consultant", text: "Was skeptical at first. But the roadmap he created was gold. Now fully booked 3 months out.", initials: "SG", color: "from-pink-400 to-pink-600" },
+              { name: "Vikram Rao", company: "EstateMax", role: "Real Estate Broker", text: "Lead generation system is brilliant. From 2 leads/month to 50+. Never expected such results.", initials: "VR", color: "from-amber-400 to-orange-600" },
+              { name: "Neha Malhotra", company: "FitLife Studio", role: "Fitness Coach", text: "Client retention went from 45% to 80%. The automation sequences he recommended are magic.", initials: "NM", color: "from-rose-400 to-rose-600" },
+              { name: "Arjun Mehta", company: "CloudNine", role: "Tech Startup CEO", text: "Raised our seed round after implementing his positioning strategy. Game changer for us.", initials: "AM", color: "from-cyan-400 to-cyan-600" },
+              { name: "Kavita Reddy", company: "Organic Foods", role: "D2C Brand Owner", text: "My ROAS went from 1.2x to 4.5x in 60 days. The offer engineering framework is pure gold.", initials: "KR", color: "from-teal-400 to-teal-600" },
+              { name: "Rajesh Iyer", company: "EduLearn", role: "EdTech Founder", text: "Booked this call as a last resort. Best decision. Our student acquisition cost halved.", initials: "RI", color: "from-indigo-400 to-indigo-600" },
             ].map((item, index) => (
               <ScrollAnimateWrapper key={index} animation="fade-up" delay={index * 50}>
                 <div className="bg-slate-950 rounded-xl md:rounded-2xl p-4 md:p-6 border border-white/10 hover:border-yellow-400/30 transition-all">
@@ -806,8 +834,8 @@ export default function Index() {
                   </div>
                   <p className="text-white/80 text-sm md:text-base mb-4 leading-relaxed">"{item.text}"</p>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center text-black font-bold text-sm md:text-base">
-                      {item.photo}
+                    <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${item.color} rounded-full flex items-center justify-center text-white font-bold text-sm md:text-base shadow-lg`}>
+                      {item.initials}
                     </div>
                     <div>
                       <p className="font-semibold text-sm">{item.name}</p>
@@ -1019,8 +1047,8 @@ export default function Index() {
                 icon: BadgeCheck
               },
               {
-                objection: "Is this too expensive for me?",
-                answer: "At ₹4,999, it's less than your daily coffee budget for a month. One good idea pays for itself 100x over.",
+                objection: "Is this really free?",
+                answer: "Yes! For a limited time, this strategy call is completely FREE (worth ₹15,000). No credit card required. No hidden fees.",
                 icon: Wallet
               },
               {
@@ -1091,7 +1119,7 @@ export default function Index() {
               { q: "What happens after the call?", a: "You get your Vision Board, Strategy Sheet, and 30-day Action Plan. Plus 7 days of WhatsApp support for questions." },
               { q: "Can my team join the call?", a: "Yes, up to 2 team members. Bring your marketing manager or co-founder - the more aligned, the better." },
               { q: "Do you offer implementation services?", a: "Yes, select clients get invited to work with us ongoing. But many implement successfully on their own with the roadmap." },
-              { q: "Why only ₹4,999? What's the catch?", a: "No catch. I want to build trust first. Many clients hire us for larger projects after seeing results from this call." },
+              { q: "Why is it FREE? What's the catch?", a: "No catch. I want to build trust first by giving you massive value upfront. Many clients hire us for larger projects after seeing results from this call." },
             ].map((item, index) => (
               <ScrollAnimateWrapper key={index} animation="fade-right" delay={index * 100}>
                 <details className="group bg-slate-950 rounded-lg md:rounded-xl border border-white/10">
@@ -1128,7 +1156,7 @@ export default function Index() {
                   Ready to Transform?
                 </h2>
                 <p className="text-white/60 text-sm md:text-base mb-4 md:mb-6">
-                  {DURATION}-min call. Only ₹{PRICE} for limited time.
+                  {DURATION}-min call. <span className="text-green-400 font-bold">FREE</span> for limited time (Worth ₹{ORIGINAL_PRICE}).
                 </p>
                 <CountdownTimer hours={24} />
               </div>
@@ -1155,8 +1183,8 @@ export default function Index() {
 
                 <div className="flex flex-col justify-center items-center bg-slate-950 rounded-xl md:rounded-2xl p-4 md:p-6">
                   <p className="text-white/60 line-through text-base md:text-xl mb-1 md:mb-2">₹{ORIGINAL_PRICE}</p>
-                  <p className="font-display font-bold text-3xl md:text-5xl text-yellow-400 mb-2 md:mb-4">₹{PRICE}</p>
-                  <p className="text-green-400 text-xs md:text-sm mb-4 md:mb-6">Save ₹{ORIGINAL_PRICE - PRICE}</p>
+                  <p className="font-display font-bold text-3xl md:text-5xl text-green-400 mb-2 md:mb-4">FREE</p>
+                  <p className="text-green-400 text-xs md:text-sm mb-4 md:mb-6">Save ₹{ORIGINAL_PRICE}</p>
                   <Link to="/checkout" className="btn-hero w-full md:w-auto text-sm md:text-base">
                     Book My Call Now →
                   </Link>
